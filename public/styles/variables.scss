@@ -1,0 +1,28 @@
+/* Color variables */
+$gray70: darken(#ffffff, 70%);
+$gray60: darken(#ffffff, 60%);
+$gray50: darken(#ffffff, 50%);
+$gray30: darken(#ffffff, 30%);
+$gray0: darken(#ffffff, 5%);
+$blue-green: #588A87;
+$green-grey: #B6C6BE;
+$light-beige: #DFD9CA;
+$light-pink: #EFCABF;
+$salmon: #EEA995;
+
+/*Fonts variables*/
+$font-primary: "Chakra Petch", sans-serif;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: $gray60;
+    font-family: $font-primary;
+}
+.page-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+}

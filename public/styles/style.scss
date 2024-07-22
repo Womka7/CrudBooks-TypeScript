@@ -1,50 +1,73 @@
 @import "bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import "./variables.scss";
+@import "./admin.scss";
+@import "./listStyle.scss";
 
-/* color variables */
-$gray70: darken(#ffffff, 70%);
-$gray60: darken(#ffffff, 60%);
-$gray50: darken(#ffffff, 50%);
-$gray30: darken(#ffffff, 30%);
-$gray0: darken(#ffffff, 5%);
-$blue-green: #588A87;
-$green-grey: #B6C6BE;
-$light-beige: #DFD9CA;
-$light-pink: #EFCABF;
-$salmon: #EEA995;
-
-/*Fonts variables*/
-$font-primary: "Chakra Petch", sans-serif;
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    color: $gray60;
-    font-family: $font-primary;
-}
 
 body {
-    background: url("https://res.cloudinary.com/dtk2o5pc4/image/upload/v1470238639/bg1_mg97hp.jpg") no-repeat center center fixed;
-    background-size: cover;
-    overflow: hidden;
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     height: 100vh;
+    background: url("../../public/img/Fondo-Page.jpg") no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
 }
 
-.container {
-    width: 400px;
+
+header {
+    width: 100%;
+    display: flex;
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: $blue-green;
+    color: $gray0;
+    margin-bottom: 900px;
+    a {
+        color: $gray0;
+        text-decoration: none;
+        margin-right: 20px;
+    }
+}
+
+
+.container{
+    max-width: 100%;
+    max-height: 100vh;
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
-    margin: 50px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+    animation: page-down 1s;
+    overflow-y: auto;
+
+    border: 9px solid blue;
+    .form-container{
+        
+        border: 9px solid blue;
+    }
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+    margin: 10px;
     padding: 20px;
     border-radius: 10px;
-    position: relative;
     transition: transform 0.5s ease;
     animation: page-down 1s;
 
@@ -113,7 +136,7 @@ main {
             font-size: 18px;
             margin: 15px 0;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
 
             &:focus {
                 outline: none;

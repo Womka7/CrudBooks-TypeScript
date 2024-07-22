@@ -1,11 +1,13 @@
 import { BooksController } from "../../controllers/book.controller";
 import { RequestLoginBooks } from "../../models/bookIRequest";
-import { ResponseLoginBooks } from "../../models/bookIResponse";
+import { Header } from "./header";
+import { HomePage } from "../pages/home";
+import { AdminPage } from "../pages/admin";
 
-let main: HTMLElement;
+export const authHome = function (): void {
+    const root = document.getElementById('root') as HTMLElement;
 
-const authHome = function (): void {
-    main = document.createElement("main");
+    const main = document.createElement("main");
     const authSection = document.createElement("section") as HTMLElement;
     authSection.classList.add('container');
 
@@ -26,7 +28,6 @@ const authHome = function (): void {
     const emailInput = document.createElement("input") as HTMLInputElement;
     emailInput.setAttribute("type", "email");
     emailInput.setAttribute("id", "email");
-    emailInput.setAttribute("placeholder", " ");
 
     const passwordGroup = document.createElement("div") as HTMLDivElement;
     passwordGroup.classList.add('form-group');
@@ -36,7 +37,6 @@ const authHome = function (): void {
     const passwordInput = document.createElement("input") as HTMLInputElement;
     passwordInput.setAttribute("type", "password");
     passwordInput.setAttribute("id", "password");
-    passwordInput.setAttribute("placeholder", " ");
 
     const loginButton = document.createElement("button") as HTMLButtonElement;
     loginButton.setAttribute("type", "submit");
@@ -55,18 +55,40 @@ const authHome = function (): void {
         const dataToLogin: RequestLoginBooks = {
             email: emailInput.value,
             password: passwordInput.value
-        }
+        };
         const booksController = new BooksController('http://190.147.64.47:5155/');
         try {
-            const resultLogin: ResponseLoginBooks = await booksController.postLogin(dataToLogin);
-            alert((resultLogin.message));
+            const resultLogin = await booksController.postLogin(dataToLogin);
+            localStorage.setItem("token", resultLogin.data.token);
+            root.innerHTML = '';
+
+            const headerContainer = document.createElement('div');
+            root.appendChild(headerContainer);
+
+            const header = new Header(headerContainer);
+            header.render();
+
+            const homePage = new HomePage(root);
+            await homePage.render();
+
+            window.addEventListener('hashchange', () => {
+                header.render();
+                const hash = window.location.hash;
+                if (hash === '#home') {
+                    const homePage = new HomePage(root);
+                    homePage.render();
+                } else if (hash === '#admin') {
+                    const adminPage = new AdminPage(root);
+                    adminPage.render();
+                } 
+            });
+
         } catch (error) {
             alert((error as Error).message);
         }
     });
-};
 
-document.addEventListener("DOMContentLoaded", () => {
-    authHome();
-    document.getElementById('root')?.appendChild(main);
-});
+    const rootElement = document.getElementById('root') as HTMLElement;
+    rootElement.innerHTML = '';
+    rootElement.appendChild(main);
+};
