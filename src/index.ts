@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const mainContainer = document.createElement('div');
         root.appendChild(mainContainer);
-        mainContainer.classList.add('container');
+        mainContainer.classList.add('container-div');
 
         switch (window.location.hash) {
             case '#home':
